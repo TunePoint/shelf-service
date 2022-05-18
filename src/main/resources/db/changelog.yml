@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: audio-1
+      id: shelf-1
       author: tunepoint
       changes:
         - sqlFile:
