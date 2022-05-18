@@ -1,0 +1,81 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'com.google.cloud.tools.jib' version '3.2.0'
+}
+
+group = 'ua.tunepoint'
+version = '0.0.1'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://artifactory.tunepoint.fun/releases"
+        allowInsecureProtocol true
+    }
+}
+
+ext {
+    set('springCloudVersion', "2021.0.2")
+}
+
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.liquibase:liquibase-core:4.9.0'
+    implementation 'ua.tunepoint:commons-security:0.0.3'
+
+    implementation 'ua.tunepoint:commons-web-model:0.0.5'
+    implementation 'ua.tunepoint:commons-web-exception:0.0.5'
+    implementation 'ua.tunepoint:commons-event-model:0.0.11'
+    implementation 'ua.tunepoint:commons-event-starter:0.0.11'
+
+    implementation 'ua.tunepoint:auth-model:0.0.9'
+    implementation 'ua.tunepoint:audio-api:0.0.15'
+    implementation 'ua.tunepoint:audio-model:0.0.15'
+    implementation 'ua.tunepoint:account-api:0.0.14'
+    implementation 'ua.tunepoint:account-model:0.0.14'
+    implementation 'ua.tunepoint:commons-web-model:0.0.5'
+    implementation 'ua.tunepoint:commons-web-exception:0.0.5'
+    implementation 'ua.tunepoint:recommendation-api:0.0.3'
+    implementation 'ua.tunepoint:recommendation-model:0.0.3'
+
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+jib {
+    from {
+        image dockerImage
+    }
+
+    to {
+        image "docker.io/tunepoint/${project.name}:${project.version}"
+
+        auth {
+            username System.getenv('DOCKER_USERNAME') ?: 'default'
+            password System.getenv('DOCKER_PASSWORD') ?: 'default'
+        }
+    }
+}

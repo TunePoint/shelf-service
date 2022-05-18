@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: shelf-service
+  jpa:
+    generate-ddl: false
+    properties:
+      hibernate:
+        default_schema: shelf
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: classpath:/db/changelog.yml
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+shelf:
+  update-cron: 0 */5 * * * ?
+  reset-interactions-cron: 0 */5 * * * ?
+
+event:
+  service-name: ${spring.application.name}
+  bootstrap-servers: ${KAFKA_URL}
+
+eureka:
+  client:
+    register-with-eureka: ${EUREKA_ENABLED:true}
+    fetch-registry: ${EUREKA_ENABLED:true}
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8765/eureka}
