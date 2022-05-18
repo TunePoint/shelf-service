@@ -26,7 +26,7 @@ CREATE TABLE shelf.audio_shelf
 (
     id SERIAL PRIMARY KEY,
 
-    CONSTRAINT audio_shelf_fk FOREIGN KEY (id) REFERENCES shelf.audios (id) ON DELETE CASCADE
+    CONSTRAINT audio_shelf_fk FOREIGN KEY (id) REFERENCES shelf.users (id) ON DELETE CASCADE
 );
 
 CREATE TABLE shelf.audio_shelf_element
@@ -41,7 +41,7 @@ CREATE TABLE shelf.playlist_shelf
 (
     id SERIAL PRIMARY KEY,
 
-    CONSTRAINT playlist_shelf_fk FOREIGN KEY (id) REFERENCES shelf.playlists (id) ON DELETE CASCADE
+    CONSTRAINT playlist_shelf_fk FOREIGN KEY (id) REFERENCES shelf.users (id) ON DELETE CASCADE
 );
 
 CREATE TABLE shelf.playlist_shelf_element
