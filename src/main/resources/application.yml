@@ -16,8 +16,10 @@ spring:
     password: ${DATABASE_PASSWORD}
 
 shelf:
-  update-cron: 0 */5 * * * ?
-  reset-interactions-cron: 0 */5 * * * ?
+  update-cron: ${SHELF_UPDATE_CRON:0 */5 * * * ?}
+  reset-interactions-cron: ${SHELF_RESET_INTERACTIONS_CRON:0 */5 * * * ?}
+  recommendation-size: ${SHELF_RECOMMENDATION_SIZE:10}
+  popular-size: ${SHELF_POPULAR_SIZE:10}
 
 event:
   service-name: ${spring.application.name}
