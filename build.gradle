@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'ua.tunepoint'
-version = '0.0.2'
+version = '0.0.3'
 sourceCompatibility = '17'
 
 configurations {
@@ -52,6 +52,8 @@ dependencies {
     implementation 'ua.tunepoint:commons-web-exception:0.0.5'
     implementation 'ua.tunepoint:recommendation-api:0.0.3'
     implementation 'ua.tunepoint:recommendation-model:0.0.3'
+
+    runtimeOnly 'org.postgresql:postgresql:42.3.3'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

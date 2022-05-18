@@ -35,7 +35,7 @@ public class ShelfService {
     private final PlaylistRecommendationService playlistRecommendationService;
     private final PlaylistShelfElementService playlistShelfElementService;
 
-    @Scheduled
+    @Scheduled(cron = "${shelf.update-cron}")
     public void updateAuthorShelves() {
         authorShelfService.getAllShelves().forEach(it -> {
             try {
@@ -48,7 +48,7 @@ public class ShelfService {
         });
     }
 
-    @Scheduled
+    @Scheduled(cron = "${shelf.update-cron}")
     public void updateAudioShelves() {
         audioShelfService.getAllShelves().forEach((it) -> {
             try {
@@ -61,7 +61,7 @@ public class ShelfService {
         });
     }
 
-    @Scheduled
+    @Scheduled(cron = "${shelf.update-cron}")
     public void constructPlaylistShelves() {
         playlistShelfService.getAllShelves().forEach((it) -> {
             try {

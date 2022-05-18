@@ -10,8 +10,8 @@ import ua.tunepoint.shelf.service.domain.client.UserClient;
 
 import java.util.List;
 
-@Service
 @Slf4j
+@Service
 @RequiredArgsConstructor
 public class UserDomainService {
 

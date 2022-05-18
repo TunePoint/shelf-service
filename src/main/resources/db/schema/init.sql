@@ -12,12 +12,12 @@ CREATE TABLE shelf.playlists
 (
     id           BIGINT PRIMARY KEY,
     is_private   BOOLEAN DEFAULT FALSE,
-    interactions BIGITNT DEFAULT 0
+    interactions BIGINT  DEFAULT 0
 );
 
 CREATE TABLE shelf.users
 (
-    id           BIGITN PRIMARY KEY,
+    id           BIGINT PRIMARY KEY,
     interactions BIGINT DEFAULT 0
 );
 
@@ -64,16 +64,22 @@ CREATE TABLE shelf.author_shelf_element
     shelf_id  BIGINT REFERENCES shelf.author_shelf (id),
     author_id BIGINT REFERENCES shelf.users (id),
 
-    CONSTRAINT author_shelf_element PRIMARY KEY (shelf_id, author_id)
+    CONSTRAINT author_shelf_element_pk PRIMARY KEY (shelf_id, author_id)
 );
 
 CREATE FUNCTION create_shelves() RETURNS trigger AS $$
 BEGIN
-    INSERT INTO shelf.author_shelf(id) VALUES(new.id);
-    INSERT INTO shelf.playlist_shelf(id) VALUES(new.id);
-    INSERT INTO shelf.audio_shelf(id) VALUES(new.id);
+INSERT INTO shelf.author_shelf(id)
+VALUES (new.id);
+INSERT INTO shelf.playlist_shelf(id)
+VALUES (new.id);
+INSERT INTO shelf.audio_shelf(id)
+VALUES (new.id);
 RETURN new;
-END $$ LANGUAGE plpgsql;
+END $$
+LANGUAGE plpgsql;
 
-CREATE TRIGGER user_created AFTER INSERT ON shelf.users
+CREATE TRIGGER user_created
+    AFTER INSERT
+    ON shelf.users
     FOR EACH ROW EXECUTE procedure create_shelves();

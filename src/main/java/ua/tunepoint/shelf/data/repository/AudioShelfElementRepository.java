@@ -8,7 +8,7 @@ import ua.tunepoint.shelf.data.entity.AudioShelfElementId;
 
 import java.util.List;
 
-public interface AudioShelfElementRepository extends ShelfElementRepository<AudioShelfElement, AudioShelfElementId> {
+public interface AudioShelfElementRepository extends JpaRepository<AudioShelfElement, AudioShelfElementId> {
 
     @Modifying
     @Query("DELETE FROM AudioShelfElement WHERE id.shelfId = :shelfId")
