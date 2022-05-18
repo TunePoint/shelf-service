@@ -41,7 +41,6 @@ public class ShelfController {
     private final AuthorService authorService;
     private final UserDomainService userDomainService;
 
-    @Cacheable
     @GetMapping("/popular/audios")
     public AudioResponse getPopularAudios() {
         var ids = audioService.getPopular(configuration.getPopularSize());
