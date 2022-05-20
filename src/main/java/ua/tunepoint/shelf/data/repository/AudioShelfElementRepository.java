@@ -14,6 +14,10 @@ public interface AudioShelfElementRepository extends JpaRepository<AudioShelfEle
     @Query("DELETE FROM AudioShelfElement WHERE id.shelfId = :shelfId")
     void deleteAllByShelfId(Long shelfId);
 
-    @Query("SELECT a.id.audioId FROM AudioShelfElement a WHERE a.id.shelfId = :shelfId")
+    @Query(
+            "SELECT a.id.audioId FROM AudioShelfElement a " +
+            "LEFT JOIN Audio entity ON entity.id = a.id.audioId " +
+            "WHERE a.id.shelfId = :shelfId AND entity.isPrivate = false"
+    )
     List<Long> findItemsByShelfId(Long shelfId);
 }

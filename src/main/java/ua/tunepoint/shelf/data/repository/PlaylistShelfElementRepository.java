@@ -14,6 +14,10 @@ public interface PlaylistShelfElementRepository extends JpaRepository<PlaylistSh
     @Query("DELETE FROM PlaylistShelfElement WHERE id.shelfId = :shelfId")
     void deleteAllByShelfId(Long shelfId);
 
-    @Query("SELECT a.id.playlistId FROM PlaylistShelfElement a WHERE a.id.shelfId = :shelfId")
+    @Query(
+            "SELECT p.id.playlistId FROM PlaylistShelfElement p " +
+            "LEFT JOIN Playlist entity ON entity.id = p.id.playlistId " +
+            "WHERE p.id.shelfId = :shelfId AND entity.isPrivate = false"
+    )
     List<Long> findItemsByShelfId(Long shelfId);
 }
