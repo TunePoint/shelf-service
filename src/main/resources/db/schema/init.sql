@@ -31,8 +31,8 @@ CREATE TABLE shelf.audio_shelf
 
 CREATE TABLE shelf.audio_shelf_element
 (
-    shelf_id BIGINT REFERENCES shelf.audio_shelf (id),
-    audio_id BIGINT REFERENCES shelf.audios (id),
+    shelf_id BIGINT REFERENCES shelf.audio_shelf (id) ON DELETE CASCADE,
+    audio_id BIGINT REFERENCES shelf.audios (id) ON DELETE CASCADE,
 
     CONSTRAINT audio_shelf_element_pk PRIMARY KEY (shelf_id, audio_id)
 );
@@ -46,8 +46,8 @@ CREATE TABLE shelf.playlist_shelf
 
 CREATE TABLE shelf.playlist_shelf_element
 (
-    shelf_id    BIGINT REFERENCES shelf.playlist_shelf (id),
-    playlist_id BIGINT REFERENCES shelf.playlists (id),
+    shelf_id    BIGINT REFERENCES shelf.playlist_shelf (id) ON DELETE CASCADE,
+    playlist_id BIGINT REFERENCES shelf.playlists (id) ON DELETE CASCADE,
 
     CONSTRAINT playlist_shelf_element_pk PRIMARY KEY (shelf_id, playlist_id)
 );
@@ -61,8 +61,8 @@ CREATE TABLE shelf.author_shelf
 
 CREATE TABLE shelf.author_shelf_element
 (
-    shelf_id  BIGINT REFERENCES shelf.author_shelf (id),
-    author_id BIGINT REFERENCES shelf.users (id),
+    shelf_id  BIGINT REFERENCES shelf.author_shelf (id) ON DELETE CASCADE,
+    author_id BIGINT REFERENCES shelf.users (id) ON DELETE CASCADE,
 
     CONSTRAINT author_shelf_element_pk PRIMARY KEY (shelf_id, author_id)
 );
